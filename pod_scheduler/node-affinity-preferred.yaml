@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: ommie
+  #node selector , this pod will only run when the nodes are labeled with disk:ssdf
+  # so u need to label any one of the node to ssdf then it will scehdule thus pod
+  # label a node: kubectl label node <node_name> disk=ssdf
+spec:
+  affinity:
+       nodeAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+           matchExpressions:
+           - key: disk
+             operator: In
+             values:
+             - ss
+  containers:
+    - name: ommie
+      image: omjaju18/simple-flask:latest
+      ports:
+        - containerPort: 80
+    

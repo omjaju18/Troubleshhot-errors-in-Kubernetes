@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: ommie
+spec:
+  #act as a exception for the nodes which are tainted, even they are tainted node will get assigned to the pod with the key and value 
+  #refer to the artilce - https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+  tolerations:
+  - key: "key1"
+    operator: Equal
+    value: "value1"
+    effect: NoSchedule
+  containers:
+    - name: ommie
+      image: omjaju18/simple-flask:latest
+      ports:
+        - containerPort: 80
+    
