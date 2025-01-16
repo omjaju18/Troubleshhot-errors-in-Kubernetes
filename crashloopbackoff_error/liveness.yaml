@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: ommie
+spec:
+  containers:
+    - name: ommie
+      image: omjaju18/simple-flask:latest
+      ports:
+        - containerPort: 80
+        # checking the health of the pod every 1 secs 
+      livenessProbe:
+         exec:
+          command:
+           - cat
+           - /tmp/healthy
+         initialDelaySeconds: 0
+         periodSeconds: 1  
+ 
